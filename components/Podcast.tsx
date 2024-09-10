@@ -4,19 +4,26 @@ import { podcastData } from "@/app/constants"
 import PodcastCard from "./PodcastCard"
 import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
+import { PodcastCardProps } from "@/types";
+
+import LoaderSpinner from "@/components/LoaderSpinner";
 const Podcast = () => {
+  const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts);
+
+  if(!trendingPodcasts) return <LoaderSpinner />
 //   const tasks = useQuery(api.tasks.get);
 //   console.log("Sample Task",tasks)
+// { _id, podcastTitle, podcastDescription, imageUrl }
   return (
     <div className="podcast_grid">
-    {podcastData?.map(
-      ({ id, title, description, imgURL }) => (
+    {trendingPodcasts?.map(
+      ({ _id, podcastTitle, podcastDescription, imageUrl }) => (
         <PodcastCard
-          key={id}
-          imgUrl={imgURL as string}
-          title={title}
-          description={description}
-          podcastId={id}
+          key={_id}
+          imgUrl={imageUrl as string}
+          title={podcastTitle}
+          description={podcastDescription}
+          podcastId={_id}
         />
       )
     )}
