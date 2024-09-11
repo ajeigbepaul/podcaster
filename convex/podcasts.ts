@@ -92,11 +92,12 @@ export const getAllPodcasts = query({
 
 // this query will get the podcast by the podcastId.
 export const getPodcastById = query({
-  args: { podcastId: v.optional(v.id("podcasts")) },
+  args: v.object({ podcastId: v.id("podcasts") }),
+  // args: { podcastId: v.optional(v.id("podcasts")) },
   handler: async (ctx, args) => {
     console.log("Received podcastId:", args.podcastId);
     if (!args.podcastId) {
-      return null;  // Handle case when podcastId is not provided
+      return null; // Handle case when podcastId is not provided
     }
     return await ctx.db.get(args.podcastId);
   },
