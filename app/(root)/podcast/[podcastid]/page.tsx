@@ -13,8 +13,8 @@ import React from 'react'
 
 const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'podcasts'> } }) => {
   const { user } = useUser();
-
-  const podcast = useQuery(api.podcasts.getPodcastById, { podcastId })
+  console.log("Podcast ID:", podcastId);
+  const podcast = useQuery(api.podcasts.getPodcastById,  podcastId ? {podcastId} : "skip" )
 
   const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, { podcastId })
 
