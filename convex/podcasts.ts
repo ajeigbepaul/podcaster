@@ -89,18 +89,25 @@ export const getAllPodcasts = query({
     return await ctx.db.query("podcasts").order("desc").collect();
   },
 });
+// this query will get the podcast by the podcastId.
 export const getPodcastById = query({
   args: {
     podcastId: v.id("podcasts"),
-  },  // Directly use a string (or optional) without strict validation
+  },
   handler: async (ctx, args) => {
-    console.log("Received podcastId:", args.podcastId);
-    if (!args.podcastId) {
-      return null;  // Handle the case where podcastId is missing
-    }
-    return await ctx.db.get(args.podcastId);  // Use podcastId directly
+    return await ctx.db.get(args.podcastId);
   },
 });
+// export const getPodcastById = query({
+//   args: {podcastId: v.id("podcasts")},
+//   handler: async (ctx, args) => {
+//     console.log("Received podcastId:", args.podcastId);
+//     if (!args.podcastId) {
+//       return null;
+//     }
+//     return await ctx.db.get(args.podcastId);
+//   },
+// });
 // this query will get the podcast by the podcastId.
 // export const getPodcastById = query({
 //   args: v.object({ podcastId: v.id("podcasts") }),

@@ -11,13 +11,12 @@ import { useQuery } from 'convex/react'
 import Image from 'next/image'
 import React from 'react'
 
-const PodcastDetails = ({ params }: { params: { podcastId: string } }) => {
+const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'podcasts'> } }) => {
   const { user } = useUser();
-  const podcastId = params.podcastId as Id<"podcasts">;
-  console.log("Podcast ID:", podcastId);
-  const podcast = useQuery(api.podcasts.getPodcastById, { podcastId });
 
-  const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, { podcastId });
+  const podcast = useQuery(api.podcasts.getPodcastById, { podcastId })
+
+  const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, { podcastId })
 
   const isOwner = user?.id === podcast?.authorId;
 
