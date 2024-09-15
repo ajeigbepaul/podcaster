@@ -8,7 +8,7 @@ import { PodcastCardProps } from "@/types";
 
 import LoaderSpinner from "@/components/LoaderSpinner";
 const Podcast = () => {
-  const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts);
+  const trendingPodcasts = useQuery(api?.podcasts?.getTrendingPodcasts);
 
   if(!trendingPodcasts) return <LoaderSpinner />
 //   const tasks = useQuery(api.tasks.get);
@@ -23,7 +23,7 @@ const Podcast = () => {
           imgUrl={imageUrl as string}
           title={podcastTitle}
           description={podcastDescription}
-          podcastId={_id}
+          id={_id}
         />
       )
     )}

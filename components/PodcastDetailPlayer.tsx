@@ -77,7 +77,7 @@ const PodcastDetailPlayer = ({
             <figure
               className="flex cursor-pointer items-center gap-2"
               onClick={() => {
-                router.push(`/profile/${authorId}`);
+                router.push(`/myprofile/${authorId}`);
               }}
             >
               <Image

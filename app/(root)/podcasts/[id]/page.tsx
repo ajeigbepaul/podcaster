@@ -11,12 +11,12 @@ import { useQuery } from 'convex/react'
 import Image from 'next/image'
 import React from 'react'
 
-const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'podcasts'> } }) => {
+const PodcastDetails = ({ params: { id } }: { params: { id: Id<'podcasts'> } }) => {
   const { user } = useUser();
 
-  const podcast = useQuery(api.podcasts.getPodcastById, { podcastId })
+  const podcast = useQuery(api?.podcasts?.getPodcastById, { id })
 
-  const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, { podcastId })
+  const similarPodcasts = useQuery(api?.podcasts?.getPodcastByVoiceType, { id })
 
   const isOwner = user?.id === podcast?.authorId;
 
@@ -41,8 +41,8 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
 
       <PodcastDetailPlayer 
         isOwner={isOwner}
-        podcastId={podcast._id}
-        audioUrl={podcast.audioUrl ?? ''}
+        podcastId={podcast?._id}
+        audioUrl={podcast?.audioUrl ?? ''}
         {...podcast}
       />
 
@@ -69,7 +69,7 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
                 imgUrl={imageUrl as string}
                 title={podcastTitle}
                 description={podcastDescription}
-                podcastId={_id}
+                id={_id}
               />
             ))}
           </div>

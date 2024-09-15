@@ -66,17 +66,17 @@ export const getUrl = mutation({
 // this query will get all the podcasts based on the voiceType of the podcast , which we are showing in the Similar Podcasts section.
 export const getPodcastByVoiceType = query({
   args: {
-    podcastId: v.id("podcasts"),
+    id: v.id("podcasts"),
   },
   handler: async (ctx, args) => {
-    const podcast = await ctx.db.get(args.podcastId);
+    const podcast = await ctx.db.get(args.id);
 
     return await ctx.db
       .query("podcasts")
       .filter((q) =>
         q.and(
           // q.eq(q.field("voiceType"), podcast?.voiceType),
-          q.neq(q.field("_id"), args.podcastId)
+          q.neq(q.field("_id"), args.id)
         )
       )
       .collect();
@@ -92,13 +92,13 @@ export const getAllPodcasts = query({
 // this query will get the podcast by the podcastId.
 export const getPodcastById = query({
   args: {
-    podcastId: v.optional(v.id("podcasts")),
+    id: v.optional(v.id("podcasts")),
   },
   handler: async (ctx, args) => {
-    if (!args.podcastId) {
+    if (!args.id) {
       return null;
     }
-    return await ctx.db.get(args.podcastId);
+    return await ctx.db.get(args.id);
   },
 });
 // export const getPodcastById = query({

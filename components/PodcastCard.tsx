@@ -6,14 +6,14 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const PodcastCard = ({
-  imgUrl, title, description, podcastId
+  imgUrl, title, description, id
 } :PodcastCardProps) => {
   const router = useRouter()
 
   const handleViews = () => {
     // increase views
 
-    router.push(`/podcast/${podcastId}`, {
+    router.push(`/podcasts/${id}`, {
       scroll: true
     })
   }

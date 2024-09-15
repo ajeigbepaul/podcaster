@@ -29,7 +29,7 @@ const Discover = ({ searchParams: { search} }: { searchParams : { search: string
                   imgUrl={imageUrl!}
                   title={podcastTitle}
                   description={podcastDescription}
-                  podcastId={_id}
+                  id={_id}
                 />
               ))}
             </div>

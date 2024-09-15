@@ -8,18 +8,18 @@ import PodcastCard from "@/components/PodcastCard";
 import ProfileCard from "@/components/ProfileCard";
 import { api } from "@/convex/_generated/api";
 
-const ProfilePage = ({
+const Profile = ({
   params,
 }: {
   params: {
-    profileId: string;
+    id: string;
   };
 }) => {
   const user = useQuery(api.users.getUserById, {
-    clerkId: params.profileId,
+    clerkId: params.id,
   });
   const podcastsData = useQuery(api.podcasts.getPodcastByAuthorId, {
-    authorId: params.profileId,
+    authorId: params.id,
   });
 
   if (!user || !podcastsData) return <LoaderSpinner />;
@@ -44,11 +44,11 @@ const ProfilePage = ({
               ?.slice(0, 4)
               .map((podcast) => (
                 <PodcastCard
-                  key={podcast._id}
-                  imgUrl={podcast.imageUrl!}
-                  title={podcast.podcastTitle!}
-                  description={podcast.podcastDescription}
-                  podcastId={podcast._id}
+                  key={podcast?._id}
+                  imgUrl={podcast?.imageUrl!}
+                  title={podcast?.podcastTitle!}
+                  description={podcast?.podcastDescription}
+                  id={podcast?._id}
                 />
               ))}
           </div>
@@ -64,4 +64,4 @@ const ProfilePage = ({
   );
 };
 
-export default ProfilePage;
+export default Profile;
