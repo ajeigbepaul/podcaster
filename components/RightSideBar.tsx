@@ -22,9 +22,10 @@ const RightSidebar = () => {
   const { audio } = useAudio();
 
   return (
-    <section className={cn('right_sidebar h-[calc(100vh-5px)]', {
+    <section className={cn('right_sidebar h-[100vh] overflow-y-auto', {
       'h-[calc(100vh-140px)]': audio?.audioUrl
     })}>
+      <div className="flex flex-col h-full pb-5 overflow-y-auto pr-1 no-scrollbar"> {/* Added this wrapper */}
       <SignedIn>
         <Link href={`/myprofile/${user?.id}`} className="flex gap-3 pb-12">
           <UserButton />
@@ -65,6 +66,7 @@ const RightSidebar = () => {
           ))}
         </div>
       </section>
+      </div>
     </section>
   )
 }
